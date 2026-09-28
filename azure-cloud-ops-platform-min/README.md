@@ -73,24 +73,6 @@ It combines:
                      Log Analytics
 ```
 
-## GCP mental model
-
-| Azure in this project | GCP concept you already know |
-|---|---|
-| Container Apps | Cloud Run |
-| PostgreSQL Flexible Server | Cloud SQL PostgreSQL |
-| Blob Storage | Cloud Storage |
-| Service Bus | Pub/Sub-style asynchronous messaging |
-| Azure Functions | Cloud Run functions |
-| Azure Monitor / Log Analytics | Cloud Monitoring / Cloud Logging |
-| Key Vault | Secret Manager |
-| Entra ID / Azure RBAC | Cloud Identity / IAM |
-| AI Search | Vertex AI Search / Vector Search patterns |
-| Azure-hosted LLM | Vertex AI / Gemini pattern |
-| Event Grid | Eventarc-style event routing |
-| Terraform | Terraform |
-| GitHub Actions OIDC | GitHub Actions workload identity federation |
-
 ## Repository layout
 
 ```text
