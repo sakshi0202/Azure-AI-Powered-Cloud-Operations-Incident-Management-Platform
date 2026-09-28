@@ -1,0 +1,39 @@
+name: application
+on:
+  push:
+    branches: [main]
+    paths: ['app/**']
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r app/requirements.txt pytest
+      - run: pytest -q
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Resolve ACR
+        id: acr
+        run: echo "name=$(az acr list --resource-group rg-cloudops-dev --query '[0].name' -o tsv)" >> "$GITHUB_OUTPUT"
+      - run: az acr login --name "${{ steps.acr.outputs.name }}"
+      - name: Build and push
+        run: |
+          IMAGE="${{ steps.acr.outputs.name }}.azurecr.io/cloudops-api:${GITHUB_SHA}"
+          docker build -t "$IMAGE" ./app
+          docker push "$IMAGE"
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+      - name: Deploy Container App
+        run: |
+          az containerapp update \
+            --name "$(az containerapp list -g rg-cloudops-dev --query '[0].name' -o tsv)" \
+            --resource-group rg-cloudops-dev \
+            --image "$IMAGE"

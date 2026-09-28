@@ -1,0 +1,15 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+.terraform.lock.hcl
+terraform.tfvars
+.env
+.env.*
+local.settings.json
+__pycache__/
+.pytest_cache/
+*.pyc
+function.zip
+.DS_Store
+.vscode/

@@ -1,0 +1,6 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.6
+azure-identity==1.19.0
+azure-search-documents==11.6.0b1
+openai==1.61.0
