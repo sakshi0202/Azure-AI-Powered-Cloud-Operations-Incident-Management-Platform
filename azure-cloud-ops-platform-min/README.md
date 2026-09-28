@@ -1,7 +1,5 @@
 # Azure AI-Powered Cloud Operations & Incident Management Platform
 
-**Portfolio project for Sakshi — Cloud Engineer / DevOps / AI Services**
-
 A production-style Azure platform that detects application and infrastructure incidents, routes them through an event-driven pipeline, retrieves operational runbooks with RAG, uses an Azure-hosted LLM for evidence-grounded incident analysis, and executes only approved, allow-listed remediation actions.
 
 This project is intentionally designed around Sakshi's existing GCP/DevOps background: GCP production concepts are mapped to Azure while the implementation uses Azure-native services.
